@@ -7,19 +7,22 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.stereotype.Controller;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.gestioncursos.service.impl.UserService;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-@Controller
+@RestController
 public class UserController {
 
 	@Autowired
@@ -29,15 +32,13 @@ public class UserController {
 	@Qualifier("userService")
 	private UserService userService;
 	
-	@PostMapping("/login/")
+	@PostMapping("/login")
 	public com.gestioncursos.entity.User login(@RequestParam("user") String username, @RequestParam("password") String password) {
-//		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-//		SecurityContextHolder.getContext().setAuthentication(authentication);
+		Authentication authentication = authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(username, password));
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		com.gestioncursos.entity.User usuario = userService.findUsuario(username);
 		String token = getJWTToken(username);
-		
-		com.gestioncursos.entity.User usuario = new com.gestioncursos.entity.User();
-		usuario.setUsername(username);
-		usuario.setPassword(password);
 		usuario.setToken(token);
 		return usuario;
 	}

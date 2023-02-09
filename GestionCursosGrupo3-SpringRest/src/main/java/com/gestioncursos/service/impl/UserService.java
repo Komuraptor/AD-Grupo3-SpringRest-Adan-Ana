@@ -51,4 +51,7 @@ public class UserService implements UserDetailsService {
 		return builder.build();
 	}
 
+	public com.gestioncursos.entity.User findUsuario(String username) {
+		return userRepository.findByUsername(username);
+	}
 }
