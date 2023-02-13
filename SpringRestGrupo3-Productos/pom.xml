@@ -8,10 +8,10 @@
 		<version>3.0.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.gestioncursos</groupId>
-	<artifactId>GestionCursosGrupo3-SpringRest</artifactId>
+	<groupId>com.springrest</groupId>
+	<artifactId>SpringRestGrupo3-Productos</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>GestionCursosGrupo3-SpringRest</name>
+	<name>SpringRestGrupo3-Productos</name>
 	<description>AD - Grupo 3</description>
 	<properties>
 		<java.version>17</java.version>
