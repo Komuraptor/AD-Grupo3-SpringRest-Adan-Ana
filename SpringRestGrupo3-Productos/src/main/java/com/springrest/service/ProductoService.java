@@ -15,7 +15,7 @@ public interface ProductoService {
 	
 	public abstract ProductoDTO findByProductoIdModel(int id);
 	
-	public abstract void  removeProducto(int id);
+	public abstract void removeProducto(int id);
 	
 	public abstract Producto transform(ProductoDTO productoDTO);
 	
