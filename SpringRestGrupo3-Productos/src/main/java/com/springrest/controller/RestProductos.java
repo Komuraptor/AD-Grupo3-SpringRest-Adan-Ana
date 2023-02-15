@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springrest.entity.Producto;
 import com.springrest.model.CategoriaDTO;
 import com.springrest.model.ProductoDTO;
 import com.springrest.service.CategoriaService;
@@ -31,14 +32,14 @@ public class RestProductos {
 	
 //	Crea un nuevo producto para una categoría
 	@PostMapping("/categories/{id}/product")
-	public ResponseEntity<?> newProductWithCategory() {
-		return null;
+	public ResponseEntity<?> newProductWithCategory(@PathVariable int id, @RequestBody ProductoDTO producto) {
+		return ResponseEntity.ok(productoService.addProducto(producto));
 	}
 	
 //	Recupera todos los productos de una determinada categoría
 	@GetMapping("/categories/{id}/product")
-	public ResponseEntity<?> listProductsFromCategory() {
-		return null;
+	public ResponseEntity<?> listProductsFromCategory(@PathVariable int id) {
+		return ResponseEntity.ok(productoService.listAllProductosByCategoria(id));
 	}
 	
 //	Recupera el producto correspondiente a ese id
