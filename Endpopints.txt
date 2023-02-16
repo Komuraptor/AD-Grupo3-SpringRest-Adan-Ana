@@ -1,0 +1,74 @@
+Endpoints Registro y Login:
+
+POST	/register
+
+{
+	"username": "username",
+	"password": "password"
+}
+
+POST	/login
+
+KEY			VALUE
+user		username
+password	password
+
+Endpoints Categorias
+
+Crea un nuevo producto para una categoría
+POST	/api/categories/{id}/product
+
+{
+    "nombre": "nombre",
+    "descripcion": "Descripcion",
+    "precio": 0
+}
+
+Recupera todos los productos de una determinada categoría
+GET		/api/categories/{id}/product
+
+Elimina una categoría y todos sus productos (categoría correspondiente a ese id)
+DELETE	/api/categories/{id}
+
+Elimina todos los productos de una determinada categoría
+DELETE	/api/categories/{id}/products
+
+Crea una nueva categoría
+POST	/api/categories
+
+{
+    "nombre": "nombre",
+    "descripcion": "Descripcion"
+}
+
+Actualiza una categoría
+PUT		/api/categories
+{
+    "id": 0,
+    "nombre": "nombre",
+    "descripcion": "Descripcion"
+}
+
+Recupera la categoría correspondiente a ese id
+GET 	/api/categories/{id}
+
+
+
+Endpoints Productos
+
+Recupera el producto correspondiente a ese id
+GET 	/api/products/{id}
+
+Actualiza el producto correspondiente a ese id
+PUT 	/api/products
+
+{
+    "id": 0,
+    "nombre": "nombre",
+    "descripcion": "descripcion",
+    "precio": 0,
+    "idCategoria": 0
+}
+
+Elimina el producto correspondiente a ese id
+DELETE	/api/products/{id}
