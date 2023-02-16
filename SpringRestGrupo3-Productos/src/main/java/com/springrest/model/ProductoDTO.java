@@ -6,17 +6,19 @@ public class ProductoDTO {
 	private String nombre;
 	private String descripcion;
 	private int precio;
+	private int idCategoria;
 	
 	public ProductoDTO() {
 		super();
 	}
 
-	public ProductoDTO(int id, String nombre, String descripcion, int precio) {
+	public ProductoDTO(int id, String nombre, String descripcion, int precio, int idCategoria) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precio = precio;
+		this.idCategoria = idCategoria;
 	}
 
 	public int getId() {
@@ -49,6 +51,14 @@ public class ProductoDTO {
 
 	public void setPrecio(int precio) {
 		this.precio = precio;
+	}
+
+	public int getIdCategoria() {
+		return idCategoria;
+	}
+
+	public void setIdCategoria(int idCategoria) {
+		this.idCategoria = idCategoria;
 	}
 
 }

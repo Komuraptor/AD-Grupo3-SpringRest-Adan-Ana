@@ -30,11 +30,6 @@ public class ProductoServiceImpl implements ProductoService {
 	public List<ProductoDTO> listAllProductos() {
 		return productoRepository.findAll().stream().map(c->transform(c)).collect(Collectors.toList());
 	}
-	
-	@Override
-	public List<ProductoDTO> listAllProductosByCategoria(int id) {
-		return productoRepository.findByCategoriaId(id).stream().map(c->transform(c)).collect(Collectors.toList());
-	}
 
 	@Override
 	public Producto findProductoById(int id) {

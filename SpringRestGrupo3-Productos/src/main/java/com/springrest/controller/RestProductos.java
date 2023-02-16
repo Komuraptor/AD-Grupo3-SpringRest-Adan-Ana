@@ -1,5 +1,8 @@
 package com.springrest.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -33,13 +36,31 @@ public class RestProductos {
 //	Crea un nuevo producto para una categoría
 	@PostMapping("/categories/{id}/product")
 	public ResponseEntity<?> newProductWithCategory(@PathVariable int id, @RequestBody ProductoDTO producto) {
-		return ResponseEntity.ok(productoService.addProducto(producto));
+		if(producto == null) {
+			return ResponseEntity.notFound().build();
+		}
+		else {
+			producto.setIdCategoria(id);
+			return ResponseEntity.ok(productoService.addProducto(producto));
+		}
 	}
 	
 //	Recupera todos los productos de una determinada categoría
 	@GetMapping("/categories/{id}/product")
 	public ResponseEntity<?> listProductsFromCategory(@PathVariable int id) {
-		return ResponseEntity.ok(productoService.listAllProductosByCategoria(id));
+		List<ProductoDTO> productos = productoService.listAllProductos();
+		List<ProductoDTO> productosCategoria = new ArrayList<>();
+		for(ProductoDTO p: productos) {
+			if(p.getIdCategoria() == id) {
+				productosCategoria.add(p);
+			}
+		}
+		if(productosCategoria.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+		else {
+			return ResponseEntity.ok(productosCategoria);
+		}
 	}
 	
 //	Recupera el producto correspondiente a ese id
@@ -57,7 +78,12 @@ public class RestProductos {
 //	Actualiza el producto correspondiente a ese id
 	@PutMapping("/products")
 	public ResponseEntity<?> updateProduct(@RequestBody ProductoDTO producto) {
-		return ResponseEntity.ok(productoService.addProducto(producto));
+		if(producto == null) {
+			return ResponseEntity.notFound().build();
+		}
+		else {
+			return ResponseEntity.ok(productoService.addProducto(producto));
+		}
 	}
 	
 //	Elimina el producto correspondiente a ese id
@@ -74,20 +100,35 @@ public class RestProductos {
 	
 //	Elimina todos los productos de una determinada categoría
 	@DeleteMapping("/categories/{id}/products")
-	public void deleteProductsFromCategory() {
-		
+	public void deleteProductsFromCategory(@PathVariable int id) {
+		List<ProductoDTO> productos = productoService.listAllProductos();
+		for(ProductoDTO p: productos) {
+			if(p.getIdCategoria() == id) {
+				productoService.removeProducto(p.getId());
+			}
+		}
 	}
 	
 //	Crea una nueva categoría
 	@PostMapping("/categories")
 	public ResponseEntity<?> newCategory(@RequestBody CategoriaDTO categoria) {
-		return ResponseEntity.ok(categoriaService.addCategoria(categoria));
+		if(categoria == null) {
+			return ResponseEntity.notFound().build();
+		}
+		else {
+			return ResponseEntity.ok(categoriaService.addCategoria(categoria));
+		}
 	}
 	
 //	Actualiza una categoría
 	@PutMapping("/categories")
 	public ResponseEntity<?> updateCategory(@RequestBody CategoriaDTO categoria) {
-		return ResponseEntity.ok(categoriaService.addCategoria(categoria));
+		if(categoria == null) {
+			return ResponseEntity.notFound().build();
+		}
+		else {
+			return ResponseEntity.ok(categoriaService.addCategoria(categoria));
+		}
 	}
 	
 //	Recupera la categoría correspondiente a ese id
