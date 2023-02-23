@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:trabajo_cop_flutter/providers/login_form_provider.dart';
-import 'package:trabajo_cop_flutter/services/services.dart';
-import 'package:trabajo_cop_flutter/widgets/widgets.dart';
+import 'package:springfluttergrupo3/providers/login_form_provider.dart';
+import 'package:springfluttergrupo3/services/services.dart';
+import 'package:springfluttergrupo3/widgets/widgets.dart';
 import '../ui/input_decorations.dart';
 
 class LoginScreen extends StatelessWidget {
