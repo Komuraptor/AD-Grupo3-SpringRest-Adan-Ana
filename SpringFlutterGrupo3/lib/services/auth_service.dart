@@ -8,15 +8,12 @@ class AuthService extends ChangeNotifier {
   final String _baseUrl = 'localhost:8080';
   final storage = FlutterSecureStorage();
 
-  Future<String?> register(String name, String surname, String email,
-      String password, String c_password, int cicle_id) async {
+  Future<String?> register(
+      String username, String password, String cpassword) async {
     final Map<String, dynamic> authData = {
-      'firstname': name,
-      'secondname': surname,
-      'email': email,
+      'username': username,
       'password': password,
-      'c_password': c_password,
-      'company_id': cicle_id,
+      'cpassword': cpassword,
     };
 
     final url = Uri.http(_baseUrl, '/register', {});
@@ -38,9 +35,9 @@ class AuthService extends ChangeNotifier {
     }
   }
 
-  Future<String?> login(String email, String password) async {
+  Future<String?> login(String username, String password) async {
     final Map<String, dynamic> authData = {
-      'email': email,
+      'username': username,
       'password': password,
     };
 

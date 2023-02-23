@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:trabajo_cop_flutter/models/models.dart';
 import 'package:trabajo_cop_flutter/providers/login_form_provider.dart';
 import 'package:trabajo_cop_flutter/services/services.dart';
 import 'package:trabajo_cop_flutter/widgets/widgets.dart';
-import 'package:trabajo_cop_flutter/models/models.dart';
 import '../ui/input_decorations.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -47,8 +45,6 @@ class RegisterScreen extends StatelessWidget {
 class _RegisterForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final getCicles = Provider.of<GetCiclos>(context);
-    List<Ciclos> allCiclos = getCicles.listciclos;
     final loginForm = Provider.of<LoginFormProvider>(context);
     //const List<Ciclos> listCiclos = authService.getCicles();
 
@@ -61,40 +57,11 @@ class _RegisterForm extends StatelessWidget {
               autocorrect: false,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecorations.authInputDecoration(
-                  hintText: 'Nombre..',
-                  labelText: 'Tu nombre',
+                  hintText: 'Usuario..',
+                  labelText: 'Nombre de usuario',
                   prefixIcon: Icons.account_circle_outlined),
-              onChanged: (value) => loginForm.name = value,
+              onChanged: (value) => loginForm.username = value,
               validator: (value) {},
-            ),
-            SizedBox(height: 4),
-            TextFormField(
-              autocorrect: false,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecorations.authInputDecoration(
-                  hintText: 'Apellido...',
-                  labelText: 'Tu apellido',
-                  prefixIcon: Icons.add_task_outlined),
-              onChanged: (value) => loginForm.surname = value,
-              validator: (value) {},
-            ),
-            SizedBox(height: 4),
-            TextFormField(
-              autocorrect: false,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecorations.authInputDecoration(
-                  hintText: 'prueba@gmail.com',
-                  labelText: 'Correo electronico',
-                  prefixIcon: Icons.alternate_email_rounded),
-              onChanged: (value) => loginForm.email = value,
-              validator: (value) {
-                String pattern =
-                    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                RegExp regExp = new RegExp(pattern);
-                return regExp.hasMatch(value ?? '')
-                    ? null
-                    : 'Escribe un correo valido';
-              },
             ),
             SizedBox(height: 4),
             TextFormField(
@@ -129,25 +96,6 @@ class _RegisterForm extends StatelessWidget {
               },
             ),
             SizedBox(height: 10),
-            DropdownButtonFormField<Ciclos>(
-              decoration: InputDecorations.authInputDecoration(
-                  prefixIcon: Icons.view_week_outlined,
-                  hintText: '',
-                  labelText: 'Cicle'),
-              // value: selectedItem,
-              items: allCiclos
-                  .map(
-                    (courseName) => DropdownMenuItem(
-                      value: courseName,
-                      child: Text(courseName.name),
-                    ),
-                  )
-                  .toList(),
-              onChanged: (value) {
-                loginForm.cicleid = (value?.id.toInt())!;
-              },
-            ),
-            SizedBox(height: 10),
             MaterialButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
@@ -171,16 +119,14 @@ class _RegisterForm extends StatelessWidget {
 
                       loginForm.isLoading = true;
 
-                      final String? errorMessage = await authService.createUser(
-                          loginForm.name,
-                          loginForm.surname,
-                          loginForm.email,
-                          loginForm.password,
-                          loginForm.password,
-                          loginForm.cicleid);
+                      final String? errorMessage = await authService.register(
+                        loginForm.username,
+                        loginForm.password,
+                        loginForm.cpassword,
+                      );
 
                       if (errorMessage == null) {
-                        //avigator.pushReplacementNamed(context, 'home');
+                        //Navigator.pushReplacementNamed(context, 'home');
 
                       } else {
                         Navigator.pushReplacementNamed(context, 'home');

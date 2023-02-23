@@ -57,17 +57,17 @@ class _LoginForn extends StatelessWidget {
                 autocorrect: false,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecorations.authInputDecoration(
-                    hintText: 'prueba@gmail.com',
-                    labelText: 'Correo electronico',
+                    hintText: 'username',
+                    labelText: 'Username',
                     prefixIcon: Icons.alternate_email_rounded),
-                onChanged: (value) => loginForm.email = value,
+                onChanged: (value) => loginForm.username = value,
                 validator: (value) {
                   String pattern =
                       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                   RegExp regExp = new RegExp(pattern);
                   return regExp.hasMatch(value ?? '')
                       ? null
-                      : 'Escribe un correo valido';
+                      : 'Escribe un usuario valido';
                 },
               ),
               SizedBox(height: 20),
@@ -111,11 +111,11 @@ class _LoginForn extends StatelessWidget {
                         loginForm.isLoading = true;
 
                         final String? errorMessage = await authService.login(
-                            loginForm.email, loginForm.password);
+                            loginForm.username, loginForm.password);
 
                         if (errorMessage != null) {
                           if (errorMessage == "u") {
-                            Navigator.pushReplacementNamed(context, 'home');
+                            Navigator.pushReplacementNamed(context, 'user');
                           } else if (errorMessage == "a") {
                             //Menu admin
                             Navigator.pushReplacementNamed(context, 'admin');

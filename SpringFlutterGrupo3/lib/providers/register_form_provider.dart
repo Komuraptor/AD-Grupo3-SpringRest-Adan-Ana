@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 
 class RegisterFormProvider extends ChangeNotifier {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  String name = '';
-  String surname = '';
-  String email = '';
+  String username = '';
   String password = '';
   String cpassword = '';
-  int cicleid = 0;
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
