@@ -7,18 +7,20 @@ public class ProductoDTO {
 	private String descripcion;
 	private int precio;
 	private int idCategoria;
+	private int favorito;
 	
 	public ProductoDTO() {
 		super();
 	}
 
-	public ProductoDTO(int id, String nombre, String descripcion, int precio, int idCategoria) {
+	public ProductoDTO(int id, String nombre, String descripcion, int precio, int idCategoria, int favorito) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precio = precio;
 		this.idCategoria = idCategoria;
+		this.favorito = favorito;
 	}
 
 	public int getId() {
@@ -59,6 +61,14 @@ public class ProductoDTO {
 
 	public void setIdCategoria(int idCategoria) {
 		this.idCategoria = idCategoria;
+	}
+
+	public int getFavorito() {
+		return favorito;
+	}
+
+	public void setFavorito(int favorito) {
+		this.favorito = favorito;
 	}
 
 }

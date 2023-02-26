@@ -58,4 +58,10 @@ public class ProductoServiceImpl implements ProductoService {
 		return modelMapper.map(producto, ProductoDTO.class);
 	}
 
+//	@Override
+//	public List<ProductoDTO> listAllProductosFavoritos() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
 }
