@@ -1,11 +1,15 @@
 package com.springrest.entity;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Producto {
@@ -17,6 +21,9 @@ public class Producto {
 	private String descripcion;
 	private int precio;
 	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="favorito")
+	private List<User> userList;
+	
 	@ManyToOne
 	@JoinColumn(name="categoriaId")
 	private Categoria categoria;
@@ -25,12 +32,13 @@ public class Producto {
 		super();
 	}
 
-	public Producto(int id, String nombre, String descripcion, int precio, Categoria categoria) {
+	public Producto(int id, String nombre, String descripcion, int precio, List<User> userList, Categoria categoria) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precio = precio;
+		this.userList = userList;
 		this.categoria = categoria;
 	}
 
@@ -64,6 +72,14 @@ public class Producto {
 
 	public void setPrecio(int precio) {
 		this.precio = precio;
+	}
+
+	public List<User> getUserList() {
+		return userList;
+	}
+
+	public void setUserList(List<User> userList) {
+		this.userList = userList;
 	}
 
 	public Categoria getCategoria() {

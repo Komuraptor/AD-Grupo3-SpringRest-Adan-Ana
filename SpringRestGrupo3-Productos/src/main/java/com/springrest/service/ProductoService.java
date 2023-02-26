@@ -11,6 +11,8 @@ public interface ProductoService {
 	
 	public abstract List<ProductoDTO> listAllProductos();
 	
+//	public abstract List<ProductoDTO> listAllProductosFavoritos(int id);
+	
 	public abstract Producto findProductoById(int id);
 	
 	public abstract ProductoDTO findByProductoIdModel(int id);
