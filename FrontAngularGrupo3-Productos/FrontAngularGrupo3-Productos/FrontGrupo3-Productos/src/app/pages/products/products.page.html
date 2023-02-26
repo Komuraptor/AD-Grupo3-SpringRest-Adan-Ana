@@ -1,0 +1,68 @@
+<div class="container flex flex-col items-center justify-center h-full">
+  <p class="mb-12 text-5xl text-center">Productos</p>
+  <div>
+    <select [(ngModel)]="selectedIdCategoria" (change)="loadFavorites()">
+      <option value="0">Selecciona una categoría</option>
+      <option *ngFor="let category of categories" [value]="category.id">
+        {{category.nombre}}
+      </option>
+    </select>
+    <button (click)="changeOnlyFavorites()" class="btn btn-success only-favorites-button">
+      <span *ngIf="!onlyFavorites" class="ml-2">Ver solo favoritos</span>
+      <span *ngIf="onlyFavorites" class="ml-2">Ver todos</span>
+    </button>
+  </div>
+  <div class="product-list">
+    <ng-container *ngFor="let product of products">
+      <div *ngIf="!onlyFavorites || product.isFavoriteId" class="product-component">
+        <product-item [product]="product" [categories]="categories" (onUpdate)="loadFavorites()"></product-item>
+      </div>
+    </ng-container>
+    <h4 *ngIf="products.length === 0" class="no-result-advice">
+        No hay resultados
+    </h4>
+  </div>
+  <div *ngIf="!isCreatingProduct && isAdmin" class="button-group">
+    <button (click)="openProductForm()" class="btn btn-secondary">
+      <span class="ml-2">Create product</span>
+    </button>
+  </div>
+  <ng-container *ngIf="isCreatingProduct">
+    <form [formGroup]="productForm" class="form-style">
+      <div>
+        <label for="user">
+          Nombre
+        </label>
+        <input id="nombre" type="text" formControlName="nombre">
+      </div>
+      <div>
+        <label for="descripcion">
+          Descripcion
+        </label>
+        <input id="descripcion" type="text" formControlName="descripcion">
+      </div>
+      <div>
+        <label for="precio">
+          Precio
+        </label>
+        <input id="precio" type="number" formControlName="precio">
+      </div>
+      <div>
+        <label for="idCategoria">
+          Categoria
+        </label>
+        <select id="idCategoria" formControlName="idCategoria">
+          <option value="0">Selecciona una categoría</option>
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{category.nombre}}
+          </option>
+        </select>
+      </div>
+    </form>
+    <div class="button-group">
+      <button (click)="createProduct()" class="btn btn-success">
+        <span class="ml-2">Create product</span>
+      </button>
+    </div>
+  </ng-container>
+</div>

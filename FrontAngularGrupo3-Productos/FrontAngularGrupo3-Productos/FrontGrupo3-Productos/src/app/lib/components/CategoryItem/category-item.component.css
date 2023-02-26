@@ -1,0 +1,39 @@
+.category-item {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    height: 100%;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    width: 350px;
+    padding: 16px 32px;
+}
+
+.nombre {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.categoria {
+    margin: 8px 0;
+}
+
+.precio {
+    margin: 8px 0;
+}
+
+.tag-title {
+    font-weight: 600;
+}
+
+.button-group {
+    display: flex;
+    flex-flow: column;
+    gap: 8px;
+}
+
+.form-style {
+    display: flex;
+    flex-flow: column;
+    gap: 8px;
+}

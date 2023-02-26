@@ -1,0 +1,38 @@
+<div class="category-item">
+  <ng-container *ngIf="!isEditing">
+    <div class="nombre">{{category.nombre}}</div>
+    <div class="descripcion">{{category.descripcion}}</div>
+    <div class="button-group">
+      <button (click)="editCategory()" class="btn btn-secondary">
+        <span class="ml-2">Editar categoría</span>
+      </button>
+      <button (click)="deleteCategory()" class="btn btn-danger">
+        <span class="ml-2">Eliminar categoría</span>
+      </button>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="isEditing">
+    <form [formGroup]="categoryForm" class="form-style">
+      <div>
+        <label for="nombre">
+          Nombre
+        </label>
+        <input id="nombre" type="text" formControlName="nombre">
+      </div>
+      <div>
+        <label for="descripcion">
+          Descripcion
+        </label>
+        <input id="descripcion" type="text" formControlName="descripcion">
+      </div>
+    </form>
+    <div class="button-group">
+      <button (click)="saveCategory()" class="btn btn-success">
+        <span class="ml-2">Guardar</span>
+      </button>
+      <button (click)="editCategory()" class="btn btn-secondary">
+        <span class="ml-2">Cancelar</span>
+      </button>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,9 @@
+.signup-form {
+    padding: 32px;
+    border: 2px solid rgb(110 155 255);
+    border-radius: 25px;
+    display: flex;
+    flex-flow: column;
+    gap: 16px;
+    align-items: center;
+}

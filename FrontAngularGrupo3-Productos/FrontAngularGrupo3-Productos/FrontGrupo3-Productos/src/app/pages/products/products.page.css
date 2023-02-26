@@ -1,0 +1,22 @@
+.product-list {
+    display: flex;
+    flex-flow: wrap;
+}
+
+.product-component {
+    margin: 16px;
+}
+
+.form-style {
+    display: flex;
+    flex-flow: column;
+    gap: 8px;
+}
+
+.no-result-advice {
+    margin-top: 16px;
+}
+
+.only-favorites-button {
+    margin-left: 16px;
+}

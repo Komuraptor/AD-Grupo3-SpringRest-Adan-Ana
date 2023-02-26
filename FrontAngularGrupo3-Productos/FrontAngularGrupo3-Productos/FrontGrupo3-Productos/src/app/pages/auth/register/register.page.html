@@ -1,0 +1,37 @@
+<div class="container flex flex-col items-center justify-center h-full">
+    <p class="mb-12 text-5xl text-center">Crea nueva cuenta</p>
+  
+    <form (submit)="onSubmitSignUp()" [formGroup]="signupForm" class="signup-form">
+      <div>
+        <label for="user">
+          usuario
+        </label>
+        <input id="user" type="text" formControlName="user">
+      </div>
+      <div>
+        <label for="password">
+          Contraseña
+        </label>
+        <input id="password" type="password" formControlName="password">
+      </div>
+      <button
+        class="
+          inline-block
+          h-12
+          px-6
+          py-3
+          font-semibold
+          text-white
+          bg-blue-600
+          rounded-lg
+          hover:bg-blue-500
+          focus:ring-4 focus:ring-offset-blue-600 focus:outline-none
+        "
+      >
+        Sign up
+      </button>
+      <a class="text-sm link" routerLink="/auth/login">Inicia sesión con cuenta existente</a>
+    </form>
+  
+  </div>
+  

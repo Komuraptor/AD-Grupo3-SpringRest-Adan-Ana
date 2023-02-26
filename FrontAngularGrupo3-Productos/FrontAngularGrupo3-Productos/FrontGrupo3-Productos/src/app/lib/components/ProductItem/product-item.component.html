@@ -1,0 +1,69 @@
+<div class="product-item">
+  <ng-container *ngIf="!isEditing">
+    <div class="nombre">{{product.nombre}}</div>
+    <div class="descripcion">{{product.descripcion}}</div>
+    <div class="categoria">
+      <span class="tag-title">Categoría:</span>
+      <span> {{product.category.nombre}}</span>    
+    </div>
+    <div class="precio">
+      <span class="tag-title">Precio:</span>
+      <span> {{product.precio}}€</span>
+    </div>
+    <div class="button-group">
+      <button *ngIf="!product.isFavoriteId" (click)="saveBookmark()" class="btn btn-success">
+        <span class="ml-2">Marcar favorito</span>
+      </button>
+      <button *ngIf="product.isFavoriteId" (click)="removeBookmark()" class="btn btn-success">
+        <span class="ml-2">Desmarcar favorito</span>
+      </button>
+      <button *ngIf="isAdmin" (click)="editProduct()" class="btn btn-secondary">
+        <span class="ml-2">Editar producto</span>
+      </button>
+      <button *ngIf="isAdmin" (click)="deleteProduct()" class="btn btn-danger">
+        <span class="ml-2">Eliminar producto</span>
+      </button>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="isEditing">
+    <form [formGroup]="productForm" class="form-style">
+      <div>
+        <label for="nombre">
+          Nombre
+        </label>
+        <input id="nombre" type="text" formControlName="nombre">
+      </div>
+      <div>
+        <label for="descripcion">
+          Descripcion
+        </label>
+        <input id="descripcion" type="text" formControlName="descripcion">
+      </div>
+      <div>
+        <label for="precio">
+          Precio
+        </label>
+        <input id="precio" type="number" formControlName="precio">
+      </div>
+      <div>
+        <label for="idCategoria">
+          Categoria
+        </label>
+        <select id="idCategoria" formControlName="idCategoria">
+          <option value="0">Selecciona una categoría</option>
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{category.nombre}}
+          </option>
+        </select>
+      </div>
+    </form>
+    <div class="button-group">
+      <button (click)="saveProduct()" class="btn btn-success">
+        <span class="ml-2">Guardar</span>
+      </button>
+      <button (click)="editProduct()" class="btn btn-secondary">
+        <span class="ml-2">Cancelar</span>
+      </button>
+    </div>
+  </ng-container>
+</div>

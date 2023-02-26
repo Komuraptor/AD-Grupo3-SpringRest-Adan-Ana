@@ -1,0 +1,37 @@
+<div class="container flex flex-col items-center justify-center h-full">
+  <p class="mb-12 text-5xl text-center">Categorías</p>
+  <div class="categories-list">
+    <div *ngFor="let category of categories" class="category-component">
+      <category-item [category]="category" (onUpdate)="loadCategories()"></category-item>
+    </div>
+    <h4 *ngIf="categories.length === 0" class="no-result-advice">
+        No hay resultados
+    </h4>
+  </div>
+  <div *ngIf="!isCreatingCategory" class="button-group">
+    <button (click)="openCategoryForm()" class="btn btn-secondary">
+      <span class="ml-2">Create category</span>
+    </button>
+  </div>
+  <ng-container *ngIf="isCreatingCategory">
+    <form [formGroup]="categoryForm" class="form-style">
+      <div>
+        <label for="user">
+          Nombre
+        </label>
+        <input id="nombre" type="text" formControlName="nombre">
+      </div>
+      <div>
+        <label for="descripcion">
+          Descripcion
+        </label>
+        <input id="descripcion" type="text" formControlName="descripcion">
+      </div>
+    </form>
+    <div class="button-group">
+      <button (click)="createCategory()" class="btn btn-success">
+        <span class="ml-2">Create category</span>
+      </button>
+    </div>
+  </ng-container>
+</div>
