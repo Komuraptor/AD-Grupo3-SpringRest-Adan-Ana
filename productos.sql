@@ -119,7 +119,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `enabled`, `password`, `role`, `token`, `username`) VALUES
-(1, b'1', '$2a$10$3kxKtOgn/.CzrEEz4fDT2u8qa0aRY30tox5KocHygaT3TMbJhr5dK', 'ROLE_USER', NULL, 'admin');
+(1, b'1', '$2a$10$3kxKtOgn/.CzrEEz4fDT2u8qa0aRY30tox5KocHygaT3TMbJhr5dK', 'ROLE_ADMIN', NULL, 'admin');
 
 -- --------------------------------------------------------
 
