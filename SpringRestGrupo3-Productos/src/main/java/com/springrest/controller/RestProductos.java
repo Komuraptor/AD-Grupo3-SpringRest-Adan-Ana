@@ -50,6 +50,7 @@ public class RestProductos {
 	private UserService userService;
 	
 //	Recupera todas las categorias
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 	@GetMapping("/categories")
 	public ResponseEntity<?> listCategories() {
 		List<CategoriaDTO> categorias = categoriaService.listAllCategorias();
@@ -75,6 +76,7 @@ public class RestProductos {
 	}
 	
 //	Recupera todos los productos
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 	@GetMapping("/products")
 	public ResponseEntity<?> listProducts() {
 		List<ProductoDTO> productos = productoService.listAllProductos();
@@ -87,7 +89,7 @@ public class RestProductos {
 	}
 	
 //	Recupera todos los productos de una determinada categoría
-	@PreAuthorize("hasRole('ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 	@GetMapping("/categories/{id}/product")
 	public ResponseEntity<?> listProductsFromCategory(@PathVariable int id) {
 		System.out.print("Ha pasado por aqui");
@@ -195,6 +197,7 @@ public class RestProductos {
 	}
 	
 //	Recupera los productos favoritos de un usuario
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 	@GetMapping("/productos/favoritos")
 	public ResponseEntity<?> getFavoriteProducts() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -215,6 +218,7 @@ public class RestProductos {
 	}
 	
 //	Marca producto como favorito
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 	@PostMapping("/productos/favoritos")
 	public ResponseEntity<?> favoriteProduct(@RequestBody ProductoFavoritoDTO productoFavoritoDTO) {
 		if(productoFavoritoDTO == null) {
@@ -230,6 +234,7 @@ public class RestProductos {
 
 	
 //	Desmarca producto como favorito
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
 	@DeleteMapping("/productos/favoritos/{id}")
 	public void deleteProductoFavorito(@PathVariable int id) {
 		productoFavoritoService.removeProductoFavorito(id);
