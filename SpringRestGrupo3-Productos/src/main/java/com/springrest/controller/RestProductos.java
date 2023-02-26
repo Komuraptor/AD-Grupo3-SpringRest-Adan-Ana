@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +35,7 @@ public class RestProductos {
 	private CategoriaService categoriaService;
 	
 //	Crea un nuevo producto para una categoría
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/categories/{id}/product")
 	public ResponseEntity<?> newProductWithCategory(@PathVariable int id, @RequestBody ProductoDTO producto) {
 		if(producto == null) {
@@ -46,6 +48,7 @@ public class RestProductos {
 	}
 	
 //	Recupera todos los productos de una determinada categoría
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@GetMapping("/categories/{id}/product")
 	public ResponseEntity<?> listProductsFromCategory(@PathVariable int id) {
 		List<ProductoDTO> productos = productoService.listAllProductos();
@@ -64,6 +67,7 @@ public class RestProductos {
 	}
 	
 //	Recupera el producto correspondiente a ese id
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/products/{id}")
 	public ResponseEntity<?> getProduct(@PathVariable int id) {
 		ProductoDTO producto = productoService.findByProductoIdModel(id);
@@ -76,6 +80,7 @@ public class RestProductos {
 	}
 	
 //	Actualiza el producto correspondiente a ese id
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping("/products")
 	public ResponseEntity<?> updateProduct(@RequestBody ProductoDTO producto) {
 		if(producto == null) {
@@ -87,18 +92,21 @@ public class RestProductos {
 	}
 	
 //	Elimina el producto correspondiente a ese id
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/products/{id}")
 	public void deleteProduct(@PathVariable int id) {
 		productoService.removeProducto(id);
 	}
 	
 //	Elimina una categoría y todos sus productos (categoría correspondiente a ese id)
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/categories/{id}")
 	public void deleteCategory(@PathVariable int id) {
 		categoriaService.removeCategoria(id);
 	}
 	
 //	Elimina todos los productos de una determinada categoría
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/categories/{id}/products")
 	public void deleteProductsFromCategory(@PathVariable int id) {
 		List<ProductoDTO> productos = productoService.listAllProductos();
@@ -110,6 +118,7 @@ public class RestProductos {
 	}
 	
 //	Crea una nueva categoría
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/categories")
 	public ResponseEntity<?> newCategory(@RequestBody CategoriaDTO categoria) {
 		if(categoria == null) {
@@ -121,6 +130,7 @@ public class RestProductos {
 	}
 	
 //	Actualiza una categoría
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping("/categories")
 	public ResponseEntity<?> updateCategory(@RequestBody CategoriaDTO categoria) {
 		if(categoria == null) {
@@ -132,6 +142,7 @@ public class RestProductos {
 	}
 	
 //	Recupera la categoría correspondiente a ese id
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/categories/{id}")
 	public ResponseEntity<?> getCategory(@PathVariable int id) {
 		CategoriaDTO categoria = categoriaService.findByCategoriaIdModel(id);
